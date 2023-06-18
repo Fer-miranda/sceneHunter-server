@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://127.0.0.1/project_db', {
+mongoose.connect('mongodb://localhost/project_db', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 }).then(() => console.log('We are making some connections!'))
