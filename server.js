@@ -10,6 +10,7 @@ app.use(cookieParser());
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended:true }));
+app.use('/img', express.static('uploads'));
 
 const routes = require('./routes/location.routes');
 require('./routes/user.routes')(app);

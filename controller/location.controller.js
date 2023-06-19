@@ -1,10 +1,5 @@
-const express = require('express');
-const app = express();
 const multer = require('multer');
 const Location = require('../model/location.model');
-
-const fs = require('fs');
-app.use('/uploads', express.static('uploads'));
 
 const storage = multer.diskStorage({
 	destination: function (req, file, cb) {
