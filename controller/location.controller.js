@@ -50,39 +50,47 @@ module.exports.createLocation = async (req, res) => {
 };
 
 module.exports.updateLocation = async (req, res) => {
-	try {
-		upload.single('image')(req, res, async (err) => {
-			if (err) {
-				return res.status(500).json({
-					message: 'Error al cargar la imagen',
-					error: err
-				});
-			}
+  try {
+    upload.single('image')(req, res, async (err) => {
+      if (err) {
+        return res.status(500).json({
+          message: 'Error al cargar la imagen',
+          error: err,
+        });
+      }
 
-			try {
-				const updatedLocation = await Location.findByIdAndUpdate(
-					req.params.id,
-					{
-						...req.body,
-						image: req.file ? req.file.path : '' // Guarda la ruta del archivo en el campo image
-					},
-					{ new: true }
-				);
-				res.json({ location: updatedLocation });
-			} catch (error) {
-				res.status(500).json({
-					message: 'No hemos podido actualizar la ubicación',
-					error
-				});
-			}
-		});
-	} catch (error) {
-		res.status(500).json({
-			message: 'No hemos podido actualizar la ubicación',
-			error
-		});
-	}
+      try {
+        const updatedFields = {
+          ...req.body,
+        };
+
+        if (req.file) {
+          updatedFields.image = req.file.filename;
+        }
+
+        const updatedLocation = await Location.findByIdAndUpdate(
+          req.params.id,
+          updatedFields,
+          { new: true }
+        );
+
+        res.json({ location: updatedLocation });
+				
+      } catch (error) {
+        res.status(500).json({
+          message: 'No hemos podido actualizar la ubicación',
+          error,
+        });
+      }
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: 'No hemos podido actualizar la ubicación',
+      error,
+    });
+  }
 };
+
 
 module.exports.deleteLocation = async (req, res) => {
 	try {
