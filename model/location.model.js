@@ -30,10 +30,8 @@ const LocationSchema = new Schema({
       type : Number,
       required : true
   },
-  // LA IDEA ES QUE EL USUARIO SUBA UNA FOTO Y LUEGO DE CREAR EL PIN LA IMAGEN SE MUESTRE
   image: {
-    type: String,
-    // required: [true, "Image is required"],
+    type: String
   },
 }, { timestamps: true });
 

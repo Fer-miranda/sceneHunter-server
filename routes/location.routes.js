@@ -1,5 +1,5 @@
 const { authenticate } = require("../config/jwt.config");
-const { getAllLocations, createLocation, updateLocation, deleteLocation, getOneLocation } = require("../controller/location.controller");
+const {  getAllLocations, createLocation, updateLocation, deleteLocation, getOneLocation } = require("../controller/location.controller");
 
 
 module.exports = (app) => {
